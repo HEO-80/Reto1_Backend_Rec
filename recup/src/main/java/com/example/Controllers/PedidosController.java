@@ -17,7 +17,7 @@ public class PedidosController {
     public static ArrayList<Pedidos> pedidos;
 
     // Devuelve el listado de pedidos con todos sus campos. No es necesario que se
-    // devuelva el número de productos de cada pedido.
+    // Devuelva el número de productos de cada pedido.
 
     public PedidosController() {
         pedidos = new ArrayList<Pedidos>();
@@ -29,8 +29,8 @@ public class PedidosController {
     }
 
     @GetMapping("/v2/pedidos")
-    public static Pedidos getAllPedidos() {
-        return PedidosController.getAllPedidos();
+    public static Pedidos getAllPedidos(int idPedido, int idProducto) {
+        return PedidosController.getAllPedidos(idProducto, idProducto);
     }
 
     @GetMapping("Pedidos/{idPedido}")
@@ -55,18 +55,18 @@ public class PedidosController {
         return pedidos.get(pedidos.size() - 1); // devuelve el ultimo elemento de la lista (el que hemos añadido)
     }
 
-    @DeleteMapping("/v2/Pedidos/{idPedido}")
-    public void DeletePedidos(@PathVariable("idPedido") int idPedido) throws Exception {
-        Pedidos p = FindPedidosById(idPedido);
-        pedidos.remove(p);
-    }
-
     @PutMapping("/v2/Pedidos/{idPedido}")
     public Pedidos UpdatePedidos(@RequestBody Pedidos updatePedidos,
             @PathVariable("idPedido") int idPedido) throws Exception {
         Pedidos p = FindPedidosById(idPedido);
         p.setIdPedido(updatePedidos.getIdPedido());
         return p;
+    }
+
+    @DeleteMapping("/v2/Pedidos/{idPedido}")
+    public void DeletePedidos(@PathVariable("idPedido") int idPedido) throws Exception {
+        Pedidos p = FindPedidosById(idPedido);
+        pedidos.remove(p);
     }
 
     public static ArrayList<Pedidos> getPedidosByIdPedido(int idPedido) {
@@ -81,6 +81,7 @@ public class PedidosController {
         return p;
     }
 
+    // agrega un producto a la lista de productos del pedido
     @GetMapping("/v2/Pedidos/{idPedido}/new/{idProducto}")
     public static void addProductoToPedidos(@PathVariable("idPedido") int idPedido,
             @PathVariable("idProducto") int idProducto) {
@@ -88,6 +89,7 @@ public class PedidosController {
                 .addCantidadOfProducto(ProductosController.FindProductoByIdProducto(idProducto));
     }
 
+    // elimina un producto de la lista de productos del pedido
     @DeleteMapping("/v2/Pedidos/{idPedido}/delete/{idProducto}")
     public static void deleteProductoFromPedidos(@PathVariable("idPedido") int idPedido,
             @PathVariable("idProducto") int idProducto) {
