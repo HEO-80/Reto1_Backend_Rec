@@ -93,7 +93,7 @@ public class Pedidos {
     // Metodo agregar prodcuto en lista
     public void addCantidadOfProducto(Productos producto) {
         for (OrderProduct orderProduct : listaProductos) {
-            if (orderProduct.getProductos().IdProducto == producto.IdProducto) {
+            if (orderProduct.getProductos().idProducto == producto.idProducto) {
                 orderProduct.autoCantidad();
                 PrecioTotal += producto.Precio;
                 return;
@@ -106,7 +106,7 @@ public class Pedidos {
     // Metodo restar prodcuto de la lista
     public void restarCantidadOfProducto(Productos producto) {
         for (OrderProduct orderProduct : listaProductos) {
-            if (orderProduct.getProductos().IdProducto == producto.IdProducto && orderProduct.CantProductos > 0) {
+            if (orderProduct.getProductos().idProducto == producto.idProducto && orderProduct.CantProductos > 0) {
                 orderProduct.restaCantidad();
                 PrecioTotal -= producto.Precio;
                 return;

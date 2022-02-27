@@ -1,7 +1,7 @@
 package com.example.Models;
 
 public class Productos {
-    public int IdProducto;
+    public int idProducto;
     public String NombreProducto;
     public double Precio;
     public String Img;
@@ -12,7 +12,7 @@ public class Productos {
     public Productos(int idProducto, String nombreProducto, double precio, String img) {
         this.NombreProducto = nombreProducto;
         this.Precio = precio;
-        this.IdProducto = idProducto;
+        this.idProducto = idProducto;
         this.Img = img;
     }
 
@@ -22,11 +22,11 @@ public class Productos {
     }
 
     public int getIdProducto() {
-        return IdProducto;
+        return idProducto;
     }
 
     public void setIdProducto(int idProducto) {
-        IdProducto = idProducto;
+        idProducto = idProducto;
     }
 
     public String getNombreProducto() {

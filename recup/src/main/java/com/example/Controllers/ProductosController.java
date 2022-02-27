@@ -33,14 +33,6 @@ public class ProductosController {
                                         "https://img.icons8.com/color/96/000000/smartphone-tablet.png"),
                         new Productos(9, "Laptop", 500.00, "https://img.icons8.com/fluency/96/000000/laptop.png")));
 
-        public static ArrayList<Productos> productosMyList = new ArrayList(Arrays.asList());
-        public static ArrayList<Productos> shoppingList = new ArrayList<>(Arrays.asList());
-
-        @GetMapping("ProductosMyList")
-        public List<Productos> GetProductosMyList() {
-                return productosMyList;
-        }
-
         @GetMapping("Productos")
         public List<Productos> GetAllProductos() {
                 return productos;
@@ -51,6 +43,7 @@ public class ProductosController {
                 return FindProductoByNombreProducto(nombreProducto);
         }
 
+        // Encuentra un producto por el nombre
         public static Productos FindProductoByNombreProducto(String nombreProducto) {
                 for (Productos producto : productos) {
                         if (producto.getNombreProducto() == nombreProducto) {
@@ -60,6 +53,7 @@ public class ProductosController {
                 throw new ElementNotFoundException();
         }
 
+        // Encuentra un producto por el precio
         public static Productos FindProductoByPrecio(double precio) {
                 for (Productos producto : productos) {
                         if (producto.getPrecio() == precio) {
@@ -69,6 +63,7 @@ public class ProductosController {
                 throw new ElementNotFoundException();
         }
 
+        // Encuentra un producto por el ID
         public static Productos FindProductoByIdProducto(int idProducto) {
                 for (Productos producto : productos) {
                         if (producto.getIdProducto() == idProducto) {
@@ -78,6 +73,7 @@ public class ProductosController {
                 throw new ElementNotFoundException();
         }
 
+        // Encuentra un pedido por el ID
         public static ArrayList<Productos> GetProductosByPedidoId(int idPedido) {
                 ArrayList<Productos> result = productos;
                 if (idPedido != 0) {
@@ -92,12 +88,14 @@ public class ProductosController {
                 return result;
         }
 
+        // Agrega un producto
         @PostMapping("/add/Productos")
         public Productos AddProducto(@RequestBody Productos newProducto) {
                 productos.add(newProducto);
                 return newProducto;
         }
 
+        // Actualiza un producto
         // @PutMapping("/Productos/{idProducto}")
         @PutMapping("/Productos/{idProducto}")
         public Productos updateProductos(@PathVariable("idProducto") int idProducto,
@@ -108,17 +106,13 @@ public class ProductosController {
                 return m;
         }
 
+        // Elimina un producto
         // @DeleteMapping("/Productos/{idProducto}")
         @DeleteMapping("/Productos/{idProducto}")
         public Productos DeleteProducto(@PathVariable("idProducto") int idProducto) {
                 Productos producto = FindProductoByIdProducto(idProducto);
                 productos.remove(idProducto);
                 return producto;
-        }
-
-        @GetMapping("/admin/productos")
-        public List<Productos> getAllProductos() {
-                return productos;
         }
 
 }
