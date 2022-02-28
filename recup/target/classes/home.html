@@ -105,19 +105,7 @@
                                 <Button class="button" th:text="#{listOrders}" style="width:80px; "></Button>                   
                             </a>
                     </div>
-                    <div class="columnaFavoritos">
-                        <h1 th:text="#{cartfavoritos} "></h1>
-                        <div th:each="producto : ${pedido.listaFavoritos}" th:object="${producto}">
-                            <span th:text="'ID: ' +  ${producto.idProducto}"></span>
-                            <span th:text="'   ' + ${producto.nombreProducto}"></span>
-                            <span th:text="'   ' + ${producto.precio} + '$'"></span>
-                        </div>
-                        <div>
-                            <a th:href="@{|/favoritos|}" >
-                                <Button class="button" th:text="#{favoritos} "></Button>  
-                                              
-                            </a>
-                        </div>
+
                     </div>
                 </div>
 
