@@ -77,4 +77,25 @@ public class PedidosViewController {
         return m;
     }
 
+    // agregar a la lista de favoritos
+    @GetMapping("/pedidos/{idPedido}/favoritos/add/{idProducto}")
+    public ModelAndView addProductoToFavoritos(@PathVariable("idPedido") int idPedido,
+            @PathVariable("idProducto") int idProducto) {
+        ModelAndView m = new ModelAndView("home");
+        PedidosController.addProductoAFavoritos(idPedido, idProducto);
+        m.addObject("pedido", PedidosController.GetPedidosById(idPedido));
+        m.addObject("productos", ProductosController.productos);
+        return m;
+    }
+
+    // borrar de la lista de favoritos
+    @GetMapping("/pedidos/{idPedido}/favoritos/remove/{idProducto}")
+    public static ModelAndView removeProductoFromFavoritos(@PathVariable("idPedido") int idPedido,
+            @PathVariable("idProducto") int idProducto) {
+        ModelAndView m = new ModelAndView("home");
+        PedidosController.deleteProductoFromFavoritos(idPedido, idProducto);
+        m.addObject("pedido", PedidosController.GetPedidosById(idPedido));
+        m.addObject("productos", ProductosController.productos);
+        return m;
+    }
 }
